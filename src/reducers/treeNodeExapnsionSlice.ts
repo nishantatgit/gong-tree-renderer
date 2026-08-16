@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 interface ExpansionState {
     expandedById: Record<number, boolean>
@@ -9,24 +9,23 @@ const initialState: ExpansionState = {
 }
 
 const expansionSlice = createSlice({
-    name: "expansion",
+    name: 'expansion',
     initialState,
 
     reducers: {
-        toggleNode(state, action: {
-            payload: number
-        }) {
+        toggleNode(
+            state,
+            action: {
+                payload: number
+            },
+        ) {
             const userId = action.payload
 
-            state.expandedById[userId] =
-                !state.expandedById[userId]
+            state.expandedById[userId] = !state.expandedById[userId]
         },
     },
 })
 
-export const { toggleNode } =
-    expansionSlice.actions
-
-
+export const { toggleNode } = expansionSlice.actions
 
 export default expansionSlice.reducer

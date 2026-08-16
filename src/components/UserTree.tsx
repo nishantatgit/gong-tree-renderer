@@ -1,17 +1,12 @@
-import { useAppSelector } from "../store/hooks"
-import UserNodeContainer from "./UserNode/UserNodeContainer"
+import { useAppSelector } from '../store/hooks'
+import UserNodeContainer from './UserNode/UserNodeContainer'
 
 function UserTree() {
-    const rootIds = useAppSelector(
-        (state) => state.hierarchy.rootIds,
-    )
+    const rootIds = useAppSelector((state) => state.hierarchy.rootIds)
 
     const rootNodeDepth = 1
     return (
-        <ul
-            className="user-tree"
-            role="tree"
-        >
+        <ul className="user-tree" role="tree">
             {rootIds.map((userId) => (
                 <UserNodeContainer
                     key={userId}

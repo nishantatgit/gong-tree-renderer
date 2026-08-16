@@ -1,6 +1,6 @@
-import type { User } from "../types/user"
-import { encode } from "../utils/encryptor"
-import { BASE_URL, AUTH_COLLECTION } from "../constants";
+import type { User } from '../types/user'
+import { encode } from '../utils/encryptor'
+import { BASE_URL, AUTH_COLLECTION } from '../constants'
 
 export async function authenticate(
     email: string,
@@ -13,36 +13,24 @@ export async function authenticate(
     )
 
     if (!response.ok) {
-        throw new Error(
-            `Authentication failed with status ${response.status}`,
-        )
+        throw new Error(`Authentication failed with status ${response.status}`)
     }
 
     return response.json()
 }
 
-export async function getUsers(
-    signal?: AbortSignal,
-): Promise<User[]> {
-    const response = await fetch(
-        `${BASE_URL}/users.json`,
-        { signal },
-    )
+export async function getUsers(signal?: AbortSignal): Promise<User[]> {
+    const response = await fetch(`${BASE_URL}/users.json`, { signal })
 
     if (!response.ok) {
-        throw new Error(
-            `Unable to retrieve users: ${response.status}`,
-        )
+        throw new Error(`Unable to retrieve users: ${response.status}`)
     }
 
-    const users: Array<User | null> | null =
-        await response.json()
+    const users: Array<User | null> | null = await response.json()
 
     if (!users) {
         return []
     }
 
-    return users.filter(
-        (user): user is User => user !== null,
-    )
+    return users.filter((user): user is User => user !== null)
 }

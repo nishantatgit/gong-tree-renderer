@@ -1,23 +1,17 @@
-import type {
-    ChangeEvent,
-    HTMLInputAutoCompleteAttribute,
-    JSX,
-} from "react"
+import type { ChangeEvent, HTMLInputAutoCompleteAttribute, JSX } from 'react'
 
 interface FormFieldProps {
     id: string
     label: string
     name: string
-    type: "email" | "password"
+    type: 'email' | 'password'
     placeholder: string
     value: string
 
     autoComplete?: HTMLInputAutoCompleteAttribute
     error?: string
 
-    onChange: (
-        event: ChangeEvent<HTMLInputElement>,
-    ) => void
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 function FormField({
@@ -35,9 +29,7 @@ function FormField({
 
     return (
         <div className="form-field">
-            <label htmlFor={id}>
-                {label}
-            </label>
+            <label htmlFor={id}>{label}</label>
 
             <input
                 id={id}
@@ -48,17 +40,11 @@ function FormField({
                 autoComplete={autoComplete}
                 onChange={onChange}
                 aria-invalid={Boolean(error)}
-                aria-describedby={
-                    error ? errorId : undefined
-                }
+                aria-describedby={error ? errorId : undefined}
             />
 
             {error && (
-                <span
-                    id={errorId}
-                    className="error"
-                    role="alert"
-                >
+                <span id={errorId} className="error" role="alert">
                     {error}
                 </span>
             )}

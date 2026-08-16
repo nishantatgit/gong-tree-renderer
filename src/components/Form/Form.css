@@ -1,5 +1,5 @@
 form {
-    padding : 2rem;
+    padding: 2rem;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,6 @@ form {
     border: 1px solid var(--purple);
     align-items: flex-end;
 }
-
 
 .form-field label {
     display: inline-block;
@@ -17,5 +16,5 @@ form {
 }
 
 input {
-    height : 1rem;
+    height: 1rem;
 }

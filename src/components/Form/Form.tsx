@@ -1,18 +1,11 @@
-import { useState } from "react"
+import { useState } from 'react'
 
-import type {
-    ChangeEvent,
-    JSX,
-    SubmitEvent,
-} from "react"
+import type { ChangeEvent, JSX, SubmitEvent } from 'react'
 
-import "./Form.css"
-import FormField from "./FormField"
+import './Form.css'
+import FormField from './FormField'
 
-import {
-    isValidEmail,
-    isValidPassword,
-} from "../../utils/inputValidator"
+import { isValidEmail, isValidPassword } from '../../utils/inputValidator'
 
 interface FormErrors {
     email: string
@@ -22,10 +15,7 @@ interface FormErrors {
 interface FormProps {
     formId: string
 
-    onSubmit: (
-        email: string,
-        password: string,
-    ) => void | Promise<void>
+    onSubmit: (email: string, password: string) => void | Promise<void>
 
     submitLabel?: string
     isSubmitting?: boolean
@@ -36,76 +26,65 @@ interface FormProps {
 function Form({
     formId,
     onSubmit,
-    submitLabel = "Login",
+    submitLabel = 'Login',
     isSubmitting = false,
     serverError = null,
-    formClass
+    formClass,
 }: FormProps): JSX.Element {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const [errors, setErrors] = useState<FormErrors>({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     })
 
-    function handleEmailChange(
-        event: ChangeEvent<HTMLInputElement>,
-    ) {
+    function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value)
 
         if (errors.email) {
             setErrors((currentErrors) => ({
                 ...currentErrors,
-                email: "",
+                email: '',
             }))
         }
     }
 
-    function handlePasswordChange(
-        event: ChangeEvent<HTMLInputElement>,
-    ) {
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
         setPassword(event.target.value)
 
         if (errors.password) {
             setErrors((currentErrors) => ({
                 ...currentErrors,
-                password: "",
+                password: '',
             }))
         }
     }
 
     function validate(): boolean {
         const nextErrors: FormErrors = {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
         }
 
         const normalizedEmail = email.trim()
 
         if (!normalizedEmail) {
-            nextErrors.email = "Email is required."
+            nextErrors.email = 'Email is required.'
         } else if (!isValidEmail(normalizedEmail)) {
-            nextErrors.email =
-                "Enter a valid email address."
+            nextErrors.email = 'Enter a valid email address.'
         }
 
         if (!isValidPassword(password)) {
-            nextErrors.password =
-                "Please enter password"
+            nextErrors.password = 'Please enter password'
         }
 
         setErrors(nextErrors)
 
-        return (
-            nextErrors.email === "" &&
-            nextErrors.password === ""
-        )
+        return nextErrors.email === '' && nextErrors.password === ''
     }
 
-    function handleSubmit(
-        event: SubmitEvent<HTMLFormElement>,
-    ) {
+    function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault()
 
         if (!validate()) {
@@ -147,21 +126,13 @@ function Form({
             />
 
             {serverError && (
-                <p
-                    className="form-error"
-                    role="alert"
-                >
+                <p className="form-error" role="alert">
                     {serverError}
                 </p>
             )}
 
-            <button
-                type="submit"
-                disabled={isSubmitting}
-            >
-                {isSubmitting
-                    ? "Logging in…"
-                    : submitLabel}
+            <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Logging in…' : submitLabel}
             </button>
         </form>
     )

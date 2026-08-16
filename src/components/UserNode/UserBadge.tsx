@@ -1,10 +1,7 @@
-import {
-    useEffect,
-    useState,
-} from "react"
+import { useEffect, useState } from 'react'
 
-import { getUserInitials } from "../../utils/getUserInitials"
-import { getUserFullName } from "../../utils/getUserFullName"
+import { getUserInitials } from '../../utils/getUserInitials'
+import { getUserFullName } from '../../utils/getUserFullName'
 
 interface UserBadgeProps {
     photo: string
@@ -12,13 +9,8 @@ interface UserBadgeProps {
     lastName: string
 }
 
-function UserBadge({
-    photo,
-    firstName,
-    lastName,
-}: UserBadgeProps) {
-    const [validatedPhoto, setValidatedPhoto] =
-        useState<string | null>(null)
+function UserBadge({ photo, firstName, lastName }: UserBadgeProps) {
+    const [validatedPhoto, setValidatedPhoto] = useState<string | null>(null)
 
     useEffect(() => {
         if (!photo) {
@@ -43,10 +35,7 @@ function UserBadge({
             {validatedPhoto ? (
                 <img
                     src={validatedPhoto}
-                    alt={getUserFullName(
-                        firstName,
-                        lastName,
-                    )}
+                    alt={getUserFullName(firstName, lastName)}
                     className="user-photo"
                 />
             ) : (

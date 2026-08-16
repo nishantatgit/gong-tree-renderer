@@ -44,7 +44,10 @@ describe('expansionSlice', () => {
 
     it('does not mutate the original state object (immutability check)', () => {
         const before = reducer(initialState, toggleNode(1))
-        const beforeSnapshot = { ...before, expandedById: { ...before.expandedById } }
+        const beforeSnapshot = {
+            ...before,
+            expandedById: { ...before.expandedById },
+        }
 
         reducer(before, toggleNode(2))
 

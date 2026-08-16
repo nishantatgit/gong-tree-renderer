@@ -1,23 +1,14 @@
-import {
-    createEntityAdapter,
-    createSlice,
-} from "@reduxjs/toolkit"
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
-import type {
-    PayloadAction,
-} from "@reduxjs/toolkit"
+import type { PayloadAction } from '@reduxjs/toolkit'
 
-import type { User } from "../types/user"
+import type { User } from '../types/user'
 
 export interface TreeNode extends User {
     children: number[]
 }
 
-type HierarchyStatus =
-    | "idle"
-    | "loading"
-    | "success"
-    | "error"
+type HierarchyStatus = 'idle' | 'loading' | 'success' | 'error'
 
 interface HierarchyExtraState {
     rootIds: number[]
@@ -25,17 +16,15 @@ interface HierarchyExtraState {
     error: string | null
 }
 
-const hierarchyAdapter =
-    createEntityAdapter<TreeNode, number>({
-        selectId: (user) => user.id,
-    })
+const hierarchyAdapter = createEntityAdapter<TreeNode, number>({
+    selectId: (user) => user.id,
+})
 
-const initialState =
-    hierarchyAdapter.getInitialState<HierarchyExtraState>({
-        rootIds: [],
-        status: "idle",
-        error: null,
-    })
+const initialState = hierarchyAdapter.getInitialState<HierarchyExtraState>({
+    rootIds: [],
+    status: 'idle',
+    error: null,
+})
 
 function buildHierarchy(users: User[]): {
     nodes: TreeNode[]
@@ -52,13 +41,8 @@ function buildHierarchy(users: User[]): {
     }
 
     for (const user of users) {
-        if (
-            user.managerId !== null &&
-            nodesById[user.managerId]
-        ) {
-            nodesById[
-                user.managerId
-            ].children.push(user.id)
+        if (user.managerId !== null && nodesById[user.managerId]) {
+            nodesById[user.managerId].children.push(user.id)
         } else {
             rootIds.push(user.id)
         }
@@ -71,49 +55,33 @@ function buildHierarchy(users: User[]): {
 }
 
 const hierarchySlice = createSlice({
-    name: "hierarchy",
+    name: 'hierarchy',
     initialState,
 
     reducers: {
         usersLoading(state) {
-            state.status = "loading"
+            state.status = 'loading'
             state.error = null
         },
 
-        usersLoaded(
-            state,
-            action: PayloadAction<User[]>,
-        ) {
-            const {
-                nodes,
-                rootIds,
-            } = buildHierarchy(action.payload)
+        usersLoaded(state, action: PayloadAction<User[]>) {
+            const { nodes, rootIds } = buildHierarchy(action.payload)
 
-            hierarchyAdapter.setAll(
-                state,
-                nodes,
-            )
+            hierarchyAdapter.setAll(state, nodes)
 
             state.rootIds = rootIds
-            state.status = "success"
+            state.status = 'success'
             state.error = null
         },
 
-        usersFailed(
-            state,
-            action: PayloadAction<string>,
-        ) {
-            state.status = "error"
+        usersFailed(state, action: PayloadAction<string>) {
+            state.status = 'error'
             state.error = action.payload
         },
     },
 })
 
-export const {
-    usersLoading,
-    usersLoaded,
-    usersFailed,
-} = hierarchySlice.actions
+export const { usersLoading, usersLoaded, usersFailed } = hierarchySlice.actions
 
 export { hierarchyAdapter }
 

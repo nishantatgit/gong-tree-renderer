@@ -25,7 +25,9 @@ describe('hierarchySlice', () => {
         expect(initialState.status).toBe('idle')
         expect(initialState.error).toBeNull()
         expect(initialState.rootIds).toEqual([])
-        expect(hierarchyAdapter.getSelectors().selectAll(initialState)).toEqual([])
+        expect(hierarchyAdapter.getSelectors().selectAll(initialState)).toEqual(
+            [],
+        )
     })
 
     describe('usersLoading', () => {
@@ -91,9 +93,7 @@ describe('hierarchySlice', () => {
         })
 
         it('treats a user as root when its managerId does not exist in the dataset', () => {
-            const users = [
-                buildUser({ id: 1, managerId: 999 }),
-            ]
+            const users = [buildUser({ id: 1, managerId: 999 })]
             const state = reducer(initialState, usersLoaded(users))
 
             expect(state.rootIds).toEqual([1])

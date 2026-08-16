@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 function ErrorPage() {
     return (
@@ -6,13 +6,9 @@ function ErrorPage() {
             <section className="error-card">
                 <h1>Page not found</h1>
 
-                <p>
-                    The requested page does not exist.
-                </p>
+                <p>The requested page does not exist.</p>
 
-                <Link to="/">
-                    Return to the application
-                </Link>
+                <Link to="/">Return to the application</Link>
             </section>
         </main>
     )

@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore } from '@reduxjs/toolkit'
 
-import expansionReducer from "../reducers/treeNodeExapnsionSlice"
-import hierarchyReducer from "../reducers/hierarchyTreeSlice"
-import authReducer from "../reducers/authSlice"
+import expansionReducer from '../reducers/treeNodeExapnsionSlice'
+import hierarchyReducer from '../reducers/hierarchyTreeSlice'
+import authReducer from '../reducers/authSlice'
 
 export const store = configureStore({
     reducer: {
@@ -12,8 +12,6 @@ export const store = configureStore({
     },
 })
 
-export type RootState =
-    ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>
 
-export type AppDispatch =
-    typeof store.dispatch
+export type AppDispatch = typeof store.dispatch

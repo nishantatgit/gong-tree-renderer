@@ -1,4 +1,5 @@
-.expand-button, .expand-button-placeholder {
+.expand-button,
+.expand-button-placeholder {
     width: 2.25rem;
 }
 
@@ -39,6 +40,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: var(--font-size-small)
+    font-size: var(--font-size-small);
 }
-

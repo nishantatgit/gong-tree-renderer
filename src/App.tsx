@@ -1,30 +1,18 @@
-import {
-    Navigate,
-    Route,
-    Routes,
-} from "react-router-dom"
+import { Navigate, Route, Routes } from 'react-router-dom'
 
-import ProtectedRoute from "./components/ProtectedRoute"
-import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from './components/ProtectedRoute'
+import PublicRoute from './components/PublicRoute'
 
-import ErrorPage from "./pages/ErrorPage"
-import HierarchyPage from "./pages/Hierarchy/HierarchyPage"
-import LoginPage from "./pages/Login/LoginPage"
-import { useAppSelector } from "./store/hooks"
-
-
+import ErrorPage from './pages/ErrorPage'
+import HierarchyPage from './pages/Hierarchy/HierarchyPage'
+import LoginPage from './pages/Login/LoginPage'
+import { useAppSelector } from './store/hooks'
 
 function HomeRedirect() {
-    const authStatus = useAppSelector(
-      (state) => state.auth.status,
-    )
+    const authStatus = useAppSelector((state) => state.auth.status)
     return (
         <Navigate
-            to={
-                authStatus === "authenticated"
-                    ? "/hierarchy"
-                    : "/login"
-            }
+            to={authStatus === 'authenticated' ? '/hierarchy' : '/login'}
             replace
         />
     )
@@ -33,10 +21,7 @@ function HomeRedirect() {
 function App() {
     return (
         <Routes>
-            <Route
-                path="/"
-                element={<HomeRedirect />}
-            />
+            <Route path="/" element={<HomeRedirect />} />
 
             <Route
                 path="/login"
@@ -56,10 +41,7 @@ function App() {
                 }
             />
 
-            <Route
-                path="*"
-                element={<ErrorPage />}
-            />
+            <Route path="*" element={<ErrorPage />} />
         </Routes>
     )
 }

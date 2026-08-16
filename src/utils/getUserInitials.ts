@@ -1,4 +1,4 @@
-import Constant from "../constants"
+import Constant from '../constants'
 function getUserInitials(firstName: string, lastName: string): string {
     const { UNKNOWN_USER } = Constant
 
